@@ -302,4 +302,3 @@ public enum Settings {
 
 [1]:https://siyoon210.tistory.com/141	"내부 정적 클래스"
 
-
