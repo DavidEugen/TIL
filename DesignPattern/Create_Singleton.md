@@ -1,4 +1,4 @@
-# 객체 생성과 관련된 패턴 - SingleTon
+# Creational - Singleton
 
 ---
 
@@ -33,7 +33,7 @@ getInstance() 메소드를 static으로 선언한 이유?
 
 - 글로벌 하게 사용하기 위해?
 
-getInstance() 가 멀티 쓰레드 환경에서 안전하지 않은 이유는?
+위의 getInstance() 가 멀티 쓰레드 환경에서 안전하지 않은 이유는?
 
 - 쓰레드1이   ``` if (instance == null)``` 을  통과한 상태이고 쓰레드2가  ```if (instance == null) ``` 을 평가하면 인스턴스 생성 전이므로 새로 생성 될 수 있는 문제 있다.
 - 
@@ -121,7 +121,7 @@ public class Settings2 {
 }
 ```
 
-변경을 원하지 않을때는 final 을 붙여주면 좋겠죠. 
+변경을 원하지 않을때는 final 을 붙여주면 좋다. 
 
 ```java
 private static final Settings2 INSTANCE = new Settings();
@@ -145,7 +145,7 @@ Settings2가 로딩 되는 시점에 static field가 초기화 되니깐 그때 
 
 #### 문제점
 
-인스턴스 생성이 메모리를 많이 사용하거나 오래 걸릴 겨우.
+인스턴스 생성이 메모리를 많이 사용하거나 오래 걸릴 경우.
 
 
 
@@ -192,7 +192,7 @@ JDK1.4 이전이거나 이보다 깔끔하게 짜고 싶으면?
 
 #### 문제점
 
-1.4 이전에 못쓰고 ```volatile``` 써야 함. 
+1.4 이전에 못쓰고 ```volatile``` 써야 함. (Main Memory에 값 저장, 변수값 일치 보장, Cpu cache 보다는 비용 큼)
 
 
 
@@ -302,3 +302,4 @@ public enum Settings {
 
 [1]:https://siyoon210.tistory.com/141	"내부 정적 클래스"
 
+[2]: https://nesoy.github.io/articles/2018-06/Java-volatile	"volatile에 대해"
