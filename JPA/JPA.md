@@ -137,4 +137,65 @@ persistence.xml 에서 buffer 사이즈를 옵션으로 조정 할 수도 있다
 
 
 
- 
+## 변경 감지(Dirty Checking)
+
+업데이트 시
+EntityManager.persist(member); 나
+EntityManager.update(member); 
+있어야 할 것 같은데, 이런거 없이 update가 바로 되는 이유는
+
+
+변경 감지 때문
+
+0. 처음 영속 컨텍스트에 올라올때 최초 상태를 1차 캐시에 스냅샷으로 저장
+1. commit()을 하게 되면 내부적으로 flush()호출
+2. 이때 엔티티와 스냅샷을 비교하여 
+3. 다르면 update SQL 을 생성하여 쓰기 지연 저장소에 저장했다가
+   나중에 일괄적으로 처리 
+
+```java
+ Member member = em.find(Member.class, 112L);
+ member.setName("changeB");
+
+//em.persist(member); // 요론것들이 있어야 할 것 같은데...
+//em.update(member); //
+
+System.out.println("============");
+```
+
+
+
+## Flush
+
+영속성 컨텍스트의 변경내용을  데이터베이스에 반영, 동기화 (맞추는) 작업.
+
+- 변경 감지 하고
+- 수정된 엔티티의 쓰기 지연 SQL 저장소에 등록하고
+- 쓰기 지연 SQL 저장소의 쿼리를 DB로 전송
+
+EntityManager.flush() 로 직접 호출 할 수 도 있다.
+
+보통은 커밋에서 (자동으로 설정되어 있으면)
+
+
+
+캐쉬 지우나? => 지우지 않는다.
+
+
+
+
+
+EntityManager.setFlushMode(FlushModeType.AUTO/FlushModeType.COMMIT) 으로 설정가능
+
+FlushModeType.AUTO => 커밋이나 쿼리 실행 시 플러시 (default)
+
+FlushModeType.COMMIT => 커밋할때만 플러시
+
+
+
+영속성 컨텍스트를 비우는게 아니라, 영속성 컨텍스트의 변경내용을 데이터베이스에 동기화
+
+트랜잭션이라는 작업 단위가 중요
+
+커밋 직전에만 동기화 하면 됨
+
