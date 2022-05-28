@@ -24,6 +24,37 @@
 
 
 
+##  엔티티 매핑 - @Entity
+
+@Entity
+기본 생성자 필수(파라미터가 없는 public 또는 protected 생성자)
+interface, final class, enum, inner class 사용 불가
+저장할 필드에 final 사용 불가
+
+@Entity(name="")사용 할 수 있다. 기본은 클래스 이름 그대로,
+가급적 기본값 사용
+
+
+
+## 데이터 베이스 자동 생성
+
+```xml
+<property name="hibernate.hbm2ddl.auto" value="create" />
+```
+
+설정하면 어플리케이션 실행 시점에 자동으로 생성 (dialect에 따라 DB에 맞는 DDL 생성) => 되도록 개발 장비에서만.. 운영에서 사용시 다듬에서 사용 필요
+create = drop create
+create-drop = create, 종료때 drop
+update = 변경 부분만 반영, alter colum 으로.. colum 삭제 없음
+
+<- 운영사용 금지 
+
+validate = 엔티티와 테이블 매핑 여부 확인
+
+none = 아무것도 안함. 위의 값(create, create-drop, update, validate)과 다른모든 값들..
+
+
+
 ## 영속과 비영속
 
 비영속 persist() 이전의 상태, 객체만 생성된 상태.
