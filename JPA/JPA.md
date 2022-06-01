@@ -309,3 +309,40 @@ TABLE_PER_CLASS
 
 
 
+## 지연로딩
+
+
+
+보통 지연 로딩만 쓰도록 한다.
+
+즉시 로딩시 관련 테이블들 다 불러 올 수 있다
+
+
+
+즉시 로딩시 N+1 나오는 이유
+
+find()의 경우 PK 를 찍어서 가져오지만
+
+createQuery() 인 JPQL 은 sql로 번역을 한다. 
+
+만약 Member 조회 하면 Member 전체를 가지고 온다. 그 안에서 다 즉시 로딩이 걸린 Entity가 있으면 그 값을 채워 넣어야 하기때문에 Entity를 조회해 온다.
+
+
+
+### FetchType default
+
+@ManyToOne 의 경우 : EAGER
+
+=> FetchType.LAXY로 선언해 줘야 한다.
+
+@OneToMany의 경우 : LAZY
+
+
+
+이론 : 자주 사용되는 짝은 즉시 로딩을
+
+가끔 사용되는 짝은 지연 로딩을
+
+**실무 : 모두 지연로딩으로 써라!!**
+
+JPQL fetch 조인이나, 엔티티 그래프 기능을 활용하라!!
