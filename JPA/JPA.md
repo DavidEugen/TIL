@@ -346,3 +346,54 @@ createQuery() 인 JPQL 은 sql로 번역을 한다.
 **실무 : 모두 지연로딩으로 써라!!**
 
 JPQL fetch 조인이나, 엔티티 그래프 기능을 활용하라!!
+
+
+
+## CASCADE
+
+부모 Entity를 저장하면서 자속 Entity를 모두 저장하고 싶을때 사용한다.
+
+연관관계 매핑하는 것과는 상관 없다.  
+
+
+
+CascadeType.ALL
+
+하나의 Parent가 Child 를 관리 할때 , 즉 Parent와 Child 의 라이프사이클이 동일할때 
+
+(다른 Entity와 Child가 관계 있으면 쓰면 안된다.)
+
+CascadeType.ALL 쓰면 된다.
+
+
+
+CascadeType.Persist는 단일 관계 아닐때 .저장만 한꺼번에 해 줬으면 좋을때
+
+
+
+CascadeType.Remove는 삭제 조심해야 할때
+
+
+
+orpahnRemoval = true 는
+
+참조가 제거된 엔티티는 다른 곳에서 참조하지 않는 고아 객체로 보고 삭제 가능
+
+참조하는 곳이 하나일때 사용해야 한다 (특정 엔티티가 개인 소유할 때 사용가능)
+
+@OneToOne, @OneToMany에서만 사용 가능
+
+개념적으로 부모를 제거하면 자식은 고아가 된다. 따라서 고아 객체 제거 기능을 활성화 하면, 부모를 제거할 때 자식도 함께 제거된다.
+
+CascadeType.REMOVE처럼 동작한다. 
+
+
+
+CascadeType.ALL + orpahnRemoval = true 로 
+
+persist()로 영속화, remove()로 제거
+
+두 옵션을 모두 활성하 하면 부모 엔티티를 통해서 자식의 생명 주기를 관리 할 수 있다.
+
+DDD 의 Aggregate Root 개념을 구현할때 유용
+
