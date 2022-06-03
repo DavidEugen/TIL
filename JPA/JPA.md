@@ -397,3 +397,31 @@ persist()로 영속화, remove()로 제거
 
 DDD 의 Aggregate Root 개념을 구현할때 유용
 
+
+
+## 값 타입
+
+### JPA의 데이터 타입 분류
+
+**엔티티 타입**
+
+@Entity로 정의하는 객체
+
+데이터가 변해도 식별자로 지속해서 추적 가능
+
+**값 타입**
+
+int, Integer, String처럼 단순히 값으로 사용하는 자바 기본 타입이나 객체
+
+식별자가 없고 값만 있으므로 변경시 추적 불가
+
+- 기본 값 타입
+  - java primitive type ( int, double )
+  - 래퍼 클래스(Integer, Long)
+  - String
+- 임베디드 타입(embedded type, 복합 값 타입)
+- 컬렉션 값 타입 (Collection value type)
+
+
+
+!! 기본타입은항상값을복사함
