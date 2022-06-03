@@ -425,3 +425,29 @@ int, Integer, String처럼 단순히 값으로 사용하는 자바 기본 타입
 
 
 !! 기본타입은항상값을복사함
+
+
+
+### Embedded Type
+
+주로 기본 값 타입을 모아서 만들어서 복합 값 타입이라고도 함
+
+정의는 @Embeddable
+사용하는 필드에서는 @Embedded
+
+**기본 생성자 필수로 만들어 줘야 함**
+
+```sehll
+No default (no-argument) constructor for class: jpabook.jpashop.domain.Member (class must be instantiated by Interceptor)
+
+```
+
+> 자바 리플렉션은 런타임에 해당 클래스의 정보를 알아내는 역할을 하는데 구체적인 클래스 타입을 알지 못해도 해당 클래스의 정보를 알 수 있다. 그런데 리플렉션은 기본생성자를 통해서 클래스 정보를 가져오므로 파라미터가 포함된 생성자 만으로는 정보를 가져오지 못한다.
+
+[기본 생성자가 갖는 의미](https://velog.io/@jakeseo_me/%EA%B0%84%EB%8B%A8%EC%A0%95%EB%A6%AC-%EC%9E%90%EB%B0%94%EC%97%90%EC%84%9C-%EA%B8%B0%EB%B3%B8-%EC%83%9D%EC%84%B1%EC%9E%90%EC%9D%98-%EC%9D%98%EB%AF%B8-feat.-Java-Reflection-Jackson-JPA)
+
+https://hyeonic.tistory.com/191
+
+https://velog.io/@yyy96/JPA-%EA%B8%B0%EB%B3%B8%EC%83%9D%EC%84%B1%EC%9E%90
+
+https://wbluke.tistory.com/6
