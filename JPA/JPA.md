@@ -451,3 +451,31 @@ https://hyeonic.tistory.com/191
 https://velog.io/@yyy96/JPA-%EA%B8%B0%EB%B3%B8%EC%83%9D%EC%84%B1%EC%9E%90
 
 https://wbluke.tistory.com/6
+
+
+
+
+
+## 경로 표현식
+
+- **상태 필드**(state field)
+
+  - 경로 탐색의 끝, **탐색X**
+
+- **연관 필드**(association field)
+
+  - **단일 값 연관 필드** 
+
+    @ManyToOne, @OneToOne, 대상이 엔티티
+
+    묵시적 내부 조인(inner join) 발생, 탐색O
+
+  - **컬렉션 값 연관 필드**
+
+    @OneToMany, @ManyToMany, 대상이 컬렉션(ex: m.orders)
+
+    묵시적 내부 조인 발생, **탐색X**
+
+    FROM 절에서 명시적 조인을 통해 별칭을 얻으면 별칭을 통 해 탐색 가능
+
+위처럼 되나.. 실무에서는 **명시적 조인** 쓰도록 해야 한다.
