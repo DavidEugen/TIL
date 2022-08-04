@@ -82,3 +82,52 @@ IP와 거의 같다. +PORT +체크섬 정도만 추가
 Domain Name 과 Ip 주소 매핑 
 
 Domain Name으로 IP 주소 변환
+
+
+
+## URI
+
+URI(Uniform Resource Identifier)
+
+URI는 로케이터(locator - URL), 이름(name - URN) 또는 둘 다 추가로 분류될 수 있다
+
+
+
+**U**niform: 리소스 식별하는 통일된 방식
+
+**R**esource: 자원, URI로 식별할 수 있는 모든 것(제한 없음) 
+
+**I**dentifier: 다른 항목과 구분하는데 필요한 정보
+
+URL: Uniform Resource Locator 
+
+URN: Uniform Resource Name
+
+URL - Locator: 리소스가 있는 **위치**를 지정
+URN - Name: 리소스에 **이름**을 부여
+위치는 변할 수 있지만, 이름은 변하지 않는다. ex 책의 isbn URN
+URN 이름만으로 실제 리소스를 찾을 수 있는 방법이 보편화 되지 않음 
+
+보통 URL을 URI 개념으로 쓴다... 
+
+
+
+## URL 문법
+
+```scheme://[userinfo@]host[:port][/path][?query][#fragment]```
+
+ex)
+
+```https://www.google.com:443/search?q=hello&hl=ko```
+
+**scheme** - 프로토콜(https) 어떤 방식으로 자원에 접근할 것인가 하는 약속 규칙
+
+[userinfo@] - 없음
+
+**host** - 호스트명(www.google.com) 
+
+[:port] - 포트 번호(443)
+
+[/path] - 패스(/search)
+
+[?query] - 쿼리 파라미터(q=hello&hl=ko)
