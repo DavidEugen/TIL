@@ -11,10 +11,10 @@
 
 ## 프로토콜 계층에서 본 데이터 전송
 
-- application 에서 Socket 라이브러리를 통해서 메세지 데이터 전달.
-- TCP 정보 생성, 메세지 데이터 포함
-- IP 패킷 생성, TCP 데이터 포함
-- LAN 카드 통해 ethernet frame로 감싸 인터넷에 전달
+- 1. application 에서 Socket 라이브러리를 통해서 메세지 데이터 전달.
+- 2. TCP 정보 생성, 메세지 데이터 포함
+- 3. IP 패킷 생성, TCP 데이터 포함
+- 4. LAN 카드 통해 ethernet frame로 감싸 인터넷에 전달
 
 
 
@@ -131,3 +131,34 @@ ex)
 [/path] - 패스(/search)
 
 [?query] - 쿼리 파라미터(q=hello&hl=ko)
+
+
+
+
+
+## 웹 브라우저 요청 흐름
+
+1. URL을 통해 HTTP Request Message 생성
+
+```https://www.google.com:443/search?q=hello&hl=ko``` 라는 요청을 보낸다면
+
+```GET /search?q=hello&hl=ko HTTP/1.1 Host: www.google.com```
+
+프로토콜 계층에서 본 데이터 전송 1.에서 매세지가 HTTP 메세지
+
+이는 곧 IP 패킷에 쌓여 전달.
+
+2. 서버에서 처리후 응답 메세지 전달.
+
+``` text
+HTTP/1.1 200 OK
+Content-Type: text/html;charset=UTF-8 Content-Length: 3423
+
+<html> 
+  <body>...</body>
+</html>
+```
+
+
+
+3. 응답 메세지로 웹브라우저에서 렌더링
