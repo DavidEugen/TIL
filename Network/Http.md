@@ -251,3 +251,98 @@ Content-Type: text/html;charset=UTF-8 Content-Length: 3423
 - 웹 브라우저로 사이트를 요청하면 HTML 뿐만 아니라 자바스크립트, css, 추가 이미지 등 수 많은 자원이 함께 다운로드
 - 지금은 HTTP 지속 연결(Persistent Connections)로 문제 해결 
 - HTTP/2, HTTP/3에서 더 많은 최적화
+
+
+
+## HTTP 메세지 구조
+
+- start-line 시작 라인 
+- header 헤더
+- empty line 공백 라인 (CRLF) 
+- message body
+
+공식 스펙 : https://www.rfc-editor.org/rfc/rfc7230#section-3
+
+
+
+### 1. 시작라인 start-line
+
+``` start-line = request-line / status-line```
+
+#### 요청메세지
+
+**request-line** = method SP request-target SP HTTP-version CRLF
+*SP => 공백, CRLF => 엔터
+
+``` text
+GET /search?q=hello&hl=ko HTTP/1.1
+Host: www.google.com
+```
+
+**HTTP 메서드** -> GET
+	서버가 수행해야 할 동작 지정
+	GET: 리소스 조회 POST: 요청 내역 처
+
+**요청 대상** -> /search?q=hello&hl=ko
+	absolute-path[?query] (절대경로[?쿼리]) 
+	절대경로= "/" 로 시작하는 경로
+	참고: *****, http://...?x=y 와 같이 다른 유형의 경로지정 방법도 있다.
+
+**HTTP Version** -> HTTP/1.1
+
+#### 응답 메시지
+
+**status-line** = HTTP-version SP status-code SP reason-phrase CRLF
+
+```text
+HTTP/1.1 200 OK
+Content-Type: text/html;charset=UTF-8 
+Content-Length: 3423
+
+<html> 
+	<body>...</body>
+</html>
+```
+
+**HTTP 버전** -> HTTP/1.1
+
+**HTTP 상태 코드** -> 200
+	요청 성공, 실패를 나타냄 ( 200: 성공, 4xx: 클라이언트 요청 오류, 5xx: 서버 내부 오류)
+
+**이유 문구** -> OK 
+	사람이 이해할 수 있는 짧은 상태 코드 설명 글
+
+
+
+### 2. HTTP  header
+
+``` header-field = field-name: OWS filed-value OWS```
+*OWS: 띄어쓰기 허용
+
+field-name은 대소문자 구문 없음
+
+#### 용도
+
+HTTP 전송에 필요한 모든 부가정보를 담는다.
+
+​	예) 메시지 바디의 내용, 메시지 바디의 크기, 압축, 인증, 요청 클라이언트(브라우저) 정보, 서버 애플리케이션 정보, 캐시 관리 정보...
+
+필요시 임의의 헤더 추가 가능
+
+
+
+### 3. CRLF
+
+구분 라인
+
+
+
+### 4. message body
+
+실제 전송할 데이터
+
+HTML 문서, 이미지, 영상, JSON 등등 byte로 표현할 수 있는 모든 데이터 전송 가능
+
+
+
+> HTTP 는 단순하지만 확장 가능하다!!
